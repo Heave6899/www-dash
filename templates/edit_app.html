@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit App</h2>
+<form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="name" class="form-label">App Name</label>
+    <input 
+      type="text" 
+      name="name" 
+      class="form-control"
+      value="{{ app_data[1] }}" 
+      required
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="redirect_url" class="form-label">Redirect URL</label>
+    <input 
+      type="url" 
+      name="redirect_url" 
+      class="form-control"
+      value="{{ app_data[2] }}"
+      required
+    >
+  </div>
+
+  <div class="mb-3">
+    <p>Current Icon:</p>
+    {% if app_data[3] %}
+      <img src="{{ url_for('static', filename=app_data[3] | replace('static/', '') ) }}"
+           alt="icon" 
+           style="width:64px;height:64px;object-fit:contain;">
+    {% else %}
+      <p>No icon uploaded</p>
+    {% endif %}
+    <br><br>
+    <label for="icon_file" class="form-label">Upload New Icon (optional)</label>
+    <input type="file" name="icon_file" class="form-control">
+  </div>
+
+  <div class="mb-3">
+    <p>Current Thumbnail:</p>
+    {% if app_data[4] %}
+      <img src="{{ url_for('static', filename=app_data[4] | replace('static/', '') ) }}"
+           alt="thumbnail"
+           style="width:128px;height:auto;object-fit:contain;">
+    {% else %}
+      <p>No thumbnail uploaded</p>
+    {% endif %}
+    <br><br>
+    <label for="thumb_file" class="form-label">Upload New Thumbnail (optional)</label>
+    <input type="file" name="thumb_file" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Update</button>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Two-Factor Authentication</h2>
+<form method="POST">
+  <div class="mb-3">
+    <label for="totp_code" class="form-label">Enter your 6-digit 2FA code</label>
+    <input type="text" name="totp_code" class="form-control" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Verify</button>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add an App</h2>
+<form method="POST" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="name" class="form-label">App Name</label>
+    <input type="text" name="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="redirect_url" class="form-label">Redirect URL</label>
+    <input type="url" name="redirect_url" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="icon_file" class="form-label">Icon File (optional)</label>
+    <input type="file" name="icon_file" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label for="thumb_file" class="form-label">Thumbnail File (optional)</label>
+    <input type="file" name="thumb_file" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-success">Add App</button>
+</form>
+{% endblock %}

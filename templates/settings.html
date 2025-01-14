@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">User Settings</h2>
+
+<div class="bg-white p-4 shadow rounded space-y-6 max-w-lg">
+  <!-- Change Password Form -->
+  <form method="POST">
+    <h4 class="text-lg font-semibold mb-2">Change Password</h4>
+    <div class="mb-4">
+      <label for="old_password" class="block text-sm font-semibold mb-1">Old Password</label>
+      <input
+        type="password"
+        name="old_password"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:border-indigo-500"
+        required
+      >
+    </div>
+    <div class="mb-4">
+      <label for="new_password" class="block text-sm font-semibold mb-1">New Password</label>
+      <input
+        type="password"
+        name="new_password"
+        class="w-full border border-gray-300 rounded px-3 py-2 focus:ring focus:border-indigo-500"
+        required
+      >
+    </div>
+
+    <!-- 2FA Enable/Disable -->
+    <h4 class="text-lg font-semibold mb-2">Two-Factor Authentication (TOTP)</h4>
+    {% if current_user.totp_enabled == 1 %}
+      <p class="mb-2">2FA is currently <strong>enabled</strong>.</p>
+      <button
+        type="submit"
+        name="2fa_action"
+        value="disable"
+        class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+      >
+        Disable 2FA
+      </button>
+    {% else %}
+      <p class="mb-2">2FA is currently <strong>disabled</strong>.</p>
+      <button
+        type="submit"
+        name="2fa_action"
+        value="enable"
+        class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+      >
+        Enable 2FA
+      </button>
+    {% endif %}
+    <div class="mt-4">
+      <button
+        type="submit"
+        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+      >
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

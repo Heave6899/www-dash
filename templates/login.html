@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white shadow-md rounded p-6">
+  <h2 class="text-xl font-bold mb-4">Login</h2>
+  <form method="POST" action="{{ url_for('login') }}">
+    <div class="mb-4">
+      <label for="username" class="block text-sm font-semibold mb-1">Username</label>
+      <input
+        type="text"
+        name="username"
+        class="block w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500"
+        required
+      >
+    </div>
+    <div class="mb-4">
+      <label for="password" class="block text-sm font-semibold mb-1">Password</label>
+      <input
+        type="password"
+        name="password"
+        class="block w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-indigo-500"
+        required
+      >
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        type="submit"
+        class="px-4 py-2 bg-indigo-500 text-white text-sm font-semibold rounded hover:bg-indigo-600"
+      >
+        Login
+      </button>
+      <a 
+        href="{{ url_for('register') }}" 
+        class="text-sm text-indigo-600 hover:underline"
+      >
+        Register
+      </a>
+    </div>
+  </form>
+</div>
+{% endblock %}

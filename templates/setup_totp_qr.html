@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Scan this QR Code with your Authenticator</h2>
+<p>Your secret is: <strong>{{ secret }}</strong></p>
+<img src="data:image/png;base64,{{ qr_b64 }}" alt="TOTP QR code">
+<p>Once scanned, test your code by logging out and back in.</p>
+{% endblock %}
