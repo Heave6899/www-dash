@@ -1,50 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">Dashboard</h1>
+<h1 class="text-3xl font-bold mb-6">Dashboard</h1>
 
-<!-- Grid of cards -->
-<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+<!-- Grid of App Cards -->
+<div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
   {% for app in apps %}
-  <div class="bg-white shadow rounded p-4 flex flex-col items-center">
-    <!-- Icon (app[3]) -->
+  <div
+    class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden flex flex-col transition transform hover:scale-105 hover:shadow-xl"
+  >
+    <!-- Thumbnail -->
     <img 
-      src="{{ app[3] if app[3] else 'https://via.placeholder.com/100' }}"
-      alt="icon" 
-      class="w-16 h-16 object-contain mb-2"
+      src="{{ url_for('static', filename=app[4].replace('static/uploads/', 'uploads/')) if app[4] else 'https://via.placeholder.com/300x150' }}" 
+      alt="Thumbnail" 
+      class="w-full h-40 object-cover"
     >
 
-    <!-- Name (app[1]) -->
-    <h5 class="text-lg font-semibold mb-2">{{ app[1] }}</h5>
+    <!-- App Info -->
+    <div class="p-4 flex-grow flex flex-col">
+      <!-- Icon and Name -->
+      <div class="flex items-center mb-4">
+        <img 
+          src="{{ url_for('static', filename=app[3].replace('static/uploads/', 'uploads/')) if app[3] else 'https://via.placeholder.com/64' }}" 
+          alt="Icon" 
+          class="w-12 h-12 object-contain mr-4"
+        >
+        <h3 class="text-xl font-semibold">{{ app[1] }}</h3>
+      </div>
 
-    <!-- Thumbnail (app[4]) -->
-    <img 
-      src="{{ app[4] if app[4] else 'https://via.placeholder.com/300x150' }}" 
-      alt="thumbnail"
-      class="mb-2 object-cover w-full h-32 rounded"
-    >
-
-    <!-- Buttons -->
-    <div class="mt-auto flex space-x-2">
-      <a 
-        href="{{ app[2] }}" 
-        target="_blank"
-        class="px-3 py-1 rounded text-white bg-indigo-500 hover:bg-indigo-600"
-      >
-        Open App
-      </a>
-      <a 
-        href="{{ url_for('edit_app', app_id=app[0]) }}" 
-        class="px-3 py-1 rounded text-white bg-yellow-500 hover:bg-yellow-600"
-      >
-        Edit
-      </a>
-      <a 
-        href="{{ url_for('delete_app', app_id=app[0]) }}" 
-        class="px-3 py-1 rounded text-white bg-red-500 hover:bg-red-600"
-        onclick="return confirm('Are you sure you want to delete this app?');"
-      >
-        Delete
-      </a>
+      <!-- Buttons -->
+      <div class="mt-auto flex space-x-2">
+        <a 
+          href="{{ app[2] }}" 
+          target="_blank"
+          class="flex-1 px-3 py-2 bg-indigo-500 text-white rounded-md text-center hover:bg-indigo-600 transition-colors"
+        >
+          Open App
+        </a>
+        <a 
+          href="{{ url_for('edit_app', app_id=app[0]) }}" 
+          class="px-3 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors"
+        >
+          Edit
+        </a>
+        <a 
+          href="{{ url_for('delete_app', app_id=app[0]) }}" 
+          class="px-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+          onclick="return confirm('Are you sure you want to delete this app?');"
+        >
+          Delete
+        </a>
+      </div>
     </div>
   </div>
   {% endfor %}

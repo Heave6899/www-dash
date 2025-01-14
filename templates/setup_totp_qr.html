@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Scan this QR Code with your Authenticator</h2>
-<p>Your secret is: <strong>{{ secret }}</strong></p>
-<img src="data:image/png;base64,{{ qr_b64 }}" alt="TOTP QR code">
-<p>Once scanned, test your code by logging out and back in.</p>
+<h2 class="text-2xl font-bold mb-6">Setup Two-Factor Authentication</h2>
+
+<div class="max-w-lg bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+  <p class="mb-4">Scan the QR code below with your authenticator app (e.g., Google Authenticator, Authy).</p>
+  <div class="flex justify-center mb-4">
+    <img src="data:image/png;base64,{{ qr_b64 }}" alt="TOTP QR Code" class="w-48 h-48">
+  </div>
+  <p class="mb-4">If you can't scan the QR code, you can manually enter this secret:</p>
+  <p class="font-mono bg-gray-100 dark:bg-gray-700 p-2 rounded">{{ secret }}</p>
+  <p class="mt-4">After setting up, please log out and log back in to complete the 2FA setup.</p>
+</div>
 {% endblock %}
